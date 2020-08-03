@@ -4,6 +4,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \LoadClass[11pt]{article}
 
+\RequirePackage[np, autolanguage]{numprint}
+
 % For page number calculations
 \RequirePackage{ifthen}
 
@@ -130,15 +132,15 @@
 \newcounter{colskipcount}
 
 \newenvironment{hoursItemization}{
-    \setcounter{colskipcount}{5}
+    \setcounter{colskipcount}{4}
     \setlength\LTleft{0pt}
     \setlength\LTright{0pt}
-    \begin{longtable}{c @{\hspace{1.5em}} p{.6\textwidth} r @{} l r r}
+    \begin{longtable}{c @{\hspace{1.5em}} p{.6\textwidth} r r r}
     \hline
     \noalign{\smallskip}
     {\itemizationHeaderStyle Date} &
     {\itemizationHeaderStyle Description} &
-    \multicolumn{2}{l}{\itemizationHeaderStyle Hours} &
+    {\itemizationHeaderStyle Hours} &
     {\itemizationHeaderStyle Rate} &
     {\itemizationHeaderStyle Amount}
     \\
@@ -155,16 +157,16 @@
 }
 
 \newenvironment{hoursItemizationWithProject}{
-    \setcounter{colskipcount}{6}
+    \setcounter{colskipcount}{5}
     \setlength\LTleft{0pt}
     \setlength\LTright{0pt}
-    \begin{longtable}{c c @{\hspace{1.5em}} p{.5\textwidth} r @{} l r r}
+    \begin{longtable}{c c @{\hspace{1.5em}} p{.5\textwidth} r r r}
     \hline
     \noalign{\smallskip}
     {\itemizationHeaderStyle Date} &
     {\itemizationHeaderStyle Project} &
     {\itemizationHeaderStyle Description} &
-    \multicolumn{2}{l}{\itemizationHeaderStyle Hours} &
+    {\itemizationHeaderStyle Hours} &
     {\itemizationHeaderStyle Rate} &
     {\itemizationHeaderStyle Amount}
     \\
@@ -220,8 +222,7 @@
     \begin{minipage}[t]{.6\textwidth}
         \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #4 \end{itemize}
     \end{minipage} &
-    {\itemizationRowStyle \@formatHoursLeft{#2}} &
-    {\itemizationRowStyle \@formatHoursRight{#2}} &
+    {\itemizationRowStyle \nprounddigits{2}\np{#2}\npnoround} &
     {\itemizationRowStyle \currencysym#3} &
     {\itemizationRowStyle \currencysym\calcamount{#2}{#3}}
     \\
